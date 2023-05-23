@@ -1,0 +1,95 @@
+:root {
+    --pr-color : #FF731D;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(160deg, var(--pr-color), #000);
+}
+
+/* Chart Style */
+canvas {
+    display: block;
+    margin: 0 auto;
+    max-width: 600px;
+    max-height: 400px;
+}
+.chart-container {
+    position: relative;
+    margin: auto;
+    height:auto;
+    width: 80vw;
+}
+
+/* Navbar Style */
+.navbar {
+    background-color: #FF731D;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.nav-link {
+    font-size: 16px;
+}
+
+.nav-link.active {
+    font-weight: 700;
+}
+
+.button-primary {
+    width: 110px;
+    height: 40px;
+    background-color: #FFFFFF;
+    color: var(--pr-color);
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* Hero Section */
+#hero {
+    height: 100vh;
+    width: 100%;
+}
+
+.hero-tagline h1 {
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 50px;
+    line-height: 72px;
+}
+
+.hero-tagline p {
+    font-size: 16px;
+    color: #FFFFFF;
+    margin-bottom: 60px;
+    margin-top: 20px;
+    line-height: 30px;
+    width: 90%;
+}
+
+.button-lg-primary {
+    width: 180px;
+    height: 70px;
+    background-color: #fff;
+    color: var(--pr-color);
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 10px;
+}
+
+.button-us-primary {
+    width: 180px;
+    height: 70px;
+    background-color: var(--pr-color);
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    border-radius: 10px;
+}

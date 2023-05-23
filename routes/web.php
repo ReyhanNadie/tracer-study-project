@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\StatistikController;
+use App\Http\Controllers\AlumniController;
 
 
 /*
@@ -14,5 +16,18 @@ use App\Http\Controllers\HomeController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', function () {
+    return view('home');
+})->name('home');
 
+Route::get('/statistik', function () {
+    return view('statistik');
+})->name('statistik');
+
+Route::get('/alumni', function () {
+    return view('alumni');
+})->name('alumni');
+
+// Route::get('/home', [HomeController::class, 'index'])-name('home');
+// Route::get('/statistik', [StatistikController::class, 'index']);
+// Route::get('/alumni', [AlumniController::class, 'index']);
