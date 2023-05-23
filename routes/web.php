@@ -27,7 +27,6 @@ Route::get('/statistik', function () {
 Route::get('/alumni', function () {
     return view('alumni');
 })->name('alumni');
-
 // Route::get('/home', [HomeController::class, 'index'])-name('home');
 // Route::get('/statistik', [StatistikController::class, 'index']);
 // Route::get('/alumni', [AlumniController::class, 'index']);

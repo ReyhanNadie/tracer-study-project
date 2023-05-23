@@ -7,7 +7,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item mx-2">
-            <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+            <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Beranda</a>
           </li>
           <li class="nav-item mx-2">
             <a class="nav-link" href="{{ route('statistik') }}">Statistik</a>
@@ -17,7 +17,7 @@
           </li>
         </ul>
         <div>
-          <button class="button-primary">Login</button>
+          <button class="button-primary">Masuk</button>
         </div>
       </div>
     </div>

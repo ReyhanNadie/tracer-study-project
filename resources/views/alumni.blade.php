@@ -28,7 +28,7 @@
                             </div>
                             <div class="row text-end">
                                 <div class="col-md-12">
-                                    <button type="submit" class="btn btn-primary">Cari Mahasiswa</button>
+                                    <button type="submit" class="button-mhs">Cari Mahasiswa</button>
                                
                                 </div>
                             </div>
