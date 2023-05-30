@@ -92,7 +92,28 @@ canvas {
     line-height: 30px;
     width: 90%;
 }
+#hero2 {
+    height: 100vh;
+    width: 100%;
+    margin-top: 75px;
+    
+}
 
+.hero2-tagline h1 {
+    color:  #1746A2;
+    font-weight: 700;
+    font-size: 35px;
+    line-height: 72px;
+}
+
+.hero2-tagline p {
+    font-size: 16px;
+    color: #5F9DF7;
+    margin-bottom: 60px;
+    margin-top: 20px;
+    line-height: 30px;
+    width: 90%;
+}
 .button-lg-primary {
     width: 180px;
     height: 70px;

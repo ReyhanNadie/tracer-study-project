@@ -10,7 +10,7 @@
     @extends('layouts.main')
 
     @section('container')
-    <section id="hero">
+    <section id="hero2">
         <div class="container p-3">
             <div class="cont">
                 <h1 class="text-center">Cari Mahasiswa</h1>
