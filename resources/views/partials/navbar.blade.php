@@ -1,5 +1,5 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-transparent">
-    <div class="container">
+<nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container"> 
       <a class="navbar-brand" href="#">Tracer Study</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -7,13 +7,13 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item mx-2">
-            <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Beranda</a>
+            <a class="nav-link {{ request()->is('home')?'active':''}}" aria-current="page" href="{{ route('home') }}">Beranda</a>
           </li>
           <li class="nav-item mx-2">
-            <a class="nav-link" href="{{ route('statistik') }}">Statistik</a>
+            <a class="nav-link {{ request()->is('statistik')?'active':''}}" href="{{ route('statistik') }}">Statistik</a>
           </li>
           <li class="nav-item mx-2">
-            <a class="nav-link" href="{{ route('alumni') }}">Alumni</a>
+            <a class="nav-link {{ request()->is('alumni')?'active':''}}" href="{{ route('alumni') }}">Alumni</a>
           </li>
         </ul>
         <div>
