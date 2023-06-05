@@ -18,6 +18,9 @@
                     <p><span class="fw-bold">Tracer Study</span> adalah website yang mengumpulkan data tentang kiprah lulusan di dunia kerja untuk meningkatkan kualitas pendidikan dan program-program perguruan tinggi. Data yang dikumpulkan mencakup data kelulusan alumni, data pekerjan alumni, dan lain lain.</p>
                     
                 </div>
+                <div class="col-md-6">
+                    <img src="/img/Gerbang-ULM.jpg" alt="Gambar" />
+                </div>
             </div>
         </div>
     </section>    
