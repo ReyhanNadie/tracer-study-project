@@ -7,7 +7,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('home')?'active':''}}" aria-current="page" href="{{ route('home') }}">Beranda</a>
+            <a class="nav-link {{ Request::path() == '/' ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Beranda</a>
           </li>
           <li class="nav-item mx-2">
             <a class="nav-link {{ request()->is('statistik')?'active':''}}" href="{{ route('statistik') }}">Statistik</a>

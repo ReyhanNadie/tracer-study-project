@@ -19,9 +19,6 @@ use App\Http\Controllers\AlumniController;
 Route::get('/', function () {
     return view('home');
 })->name('home');
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
 
 Route::get('/statistik', function () {
     return view('statistik');
