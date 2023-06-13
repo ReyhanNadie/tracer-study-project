@@ -16,7 +16,7 @@ use App\Http\Controllers\AlumniController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('home');
 })->name('home');
 
@@ -27,6 +27,14 @@ Route::get('/statistik', function () {
 Route::get('/alumni', function () {
     return view('alumni');
 })->name('alumni');
+
+Route::get('/login', function () {
+    return view('login');
+})->name('login');
+
+Route::get('/register', function () {
+    return view('register');
+})->name('register');
 // Route::get('/home', [HomeController::class, 'index'])-name('home');
 // Route::get('/statistik', [StatistikController::class, 'index']);
 // Route::get('/alumni', [AlumniController::class, 'index']);
