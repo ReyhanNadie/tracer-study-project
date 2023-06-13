@@ -64,11 +64,7 @@ canvas {
     /*font-family: 'neue';*/
     font-weight: 800;
     font-size: 30px;
-<<<<<<< HEAD
     color: #1746A2 !important;
-=======
-    color: #ffffff !important;
->>>>>>> 53c79ca82d7053786f6e2b7c83a8aa312348c07a
     position: relative;
     transition: transform 0.3s;
     
@@ -112,11 +108,7 @@ canvas {
   }
 
 .nav-link {
-<<<<<<< HEAD
-    font-size: 16px;
-=======
     font-size: 18px;
->>>>>>> 53c79ca82d7053786f6e2b7c83a8aa312348c07a
     position: relative;
     transition: transform 0.3s;
   }
@@ -292,7 +284,6 @@ canvas {
 .cont h1{
     color: #1746A2;
 }
-<<<<<<< HEAD
 
 /* @extend display-flex; */
 display-flex, .display-flex, .display-flex-center, .signup-content, .signin-content, .social-login, .socials {
@@ -887,5 +878,3 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
   
   /*# sourceMappingURL=style.css.map */
   
-=======
->>>>>>> 53c79ca82d7053786f6e2b7c83a8aa312348c07a
