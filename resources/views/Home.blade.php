@@ -306,7 +306,11 @@ https://templatemo.com/tm-570-chain-app-dev
                     
                 </div>
                 <div class="col-md-6">
+<<<<<<< HEAD
                     <img src="/img/Data report-pana.png" alt="Gambar" />
+=======
+                    <img src="/img/Gerbang-ULM.jpg" alt="Gambar" />
+>>>>>>> 53c79ca82d7053786f6e2b7c83a8aa312348c07a
                 </div>
             </div>
         </div>
