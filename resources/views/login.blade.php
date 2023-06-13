@@ -14,14 +14,13 @@
 </head>
 <body>
 
-    <div class="main">
-
+    <div class="main-login">
         <!-- Sing in  Form -->
         <section class="sign-in">
             <div class="container">
                 <div class="signin-content">
                     <div class="signin-image">
-                        <figure><img src="images/signin-image.jpg" alt="sing up image"></figure>
+                        <figure><img src="images/signin-image.png" alt="sing up image"></figure>
                         <a href="{{ route('register') }}" class="signup-image-link">Buat Akun</a>
                     </div>
 

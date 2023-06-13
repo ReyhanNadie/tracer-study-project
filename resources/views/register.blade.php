@@ -14,8 +14,7 @@
 </head>
 <body>
 
-    <div class="main">
-
+    <div class="main-register">
         <!-- Sign up form -->
         <section class="signup">
             <div class="container">
@@ -49,7 +48,7 @@
                         </form>
                     </div>
                     <div class="signup-image">
-                        <figure><img src="images/signup-image.jpg" alt="sing up image"></figure>
+                        <figure><img src="images/signup-image.png" alt="sing up image"></figure>
                         <a href="{{ route('login') }}" class="signup-image-link">Sudah Mempunyai Akun</a>
                     </div>
                 </div>

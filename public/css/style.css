@@ -472,9 +472,13 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     font-family: Poppins;
     font-size: 36px; }
   
-  .main {
+  .main-login {
     background: #f8f8f8;
-    padding: 150px 0; }
+    padding: 50px 0; }
+
+  .main-register {
+    background: #f8f8f8;
+    padding: 60px 0 0 0;}
   
   .clear {
     clear: both; }
@@ -540,7 +544,7 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     margin-bottom: 150px; }
   
   .signup-content {
-    padding: 75px 0; }
+    padding: 25px 0; }
   
   .signup-form, .signup-image, .signin-form, .signin-image {
     width: 50%;
@@ -561,7 +565,7 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
   
   .form-submit {
     display: inline-block;
-    background: #6dabe4;
+    background: #FF731D;
     color: #fff;
     border-bottom: none;
     width: auto;
@@ -574,7 +578,7 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     margin-top: 25px;
     cursor: pointer; }
     .form-submit:hover {
-      background: #4292dc; }
+      opacity: 60%; }
   
   #signin {
     margin-top: 16px; }
@@ -738,8 +742,8 @@ display-flex, .display-flex, .display-flex-center, .signup-content, .signin-cont
     font-size: 18px; }
   
   .signin-content {
-    padding-top: 67px;
-    padding-bottom: 87px; }
+    padding-top: 50px;
+    padding-bottom: 50px; }
   
   .social-login {
     align-items: center;
