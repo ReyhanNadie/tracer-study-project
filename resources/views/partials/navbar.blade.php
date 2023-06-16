@@ -1,24 +1,45 @@
-<nav class="navbar navbar-expand-lg navbar-dark">
-    <div class="container"> 
+{{-- <style>
+    nav.navbar:hover{
+        background-color: #3333;
+    }
+</style> --}}
+
+<nav id="navbar" class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
       <a class="navbar-brand" href="#">Tracer Study</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav mx-auto">
-          <li class="nav-item mx-2">
-            <a class="nav-link {{ Request::path() == '/' ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Beranda</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('statistik')?'active':''}}" href="{{ route('statistik') }}">Statistik</a>
-          </li>
-          <li class="nav-item mx-2">
-            <a class="nav-link {{ request()->is('alumni')?'active':''}}" href="{{ route('alumni') }}">Alumni</a>
-          </li>
-        </ul>
-        <div>
-          <button class="button-primary">Masuk</button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav m-auto ">
+          <a class="nav-link" aria-current="page" href="/#">Home</a>
+          <a class="nav-link" href="/#about">Tentang Tracer Study</a>
+          <a class="nav-link" href="/#statistik">Statistik</a>
         </div>
-      </div>
+        @auth
+        {{-- <a class="nav-link" href="/logout">Logout</a> --}}
+      <li class="nav-item dropdown" style="list-style: none">
+        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          {{auth()->user()->name}}
+        </a>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="/alumni">My Dashboard</a></li>
+          <form action="/logout" method="post">
+            @csrf
+            <li>
+              <a class="dropdown-item" href="/logout">
+                <button class="btn" type="submit">Logout</button>
+              </a>
+            </li>
+          </form>
+        </ul>
+      </li>  
+      @else
+      <a class="nav-link" href="/login">Login</a>
+      @endauth
+    </div>
+
+      {{-- <a class="navbar-brand" href="#">{{auth()->user()->name}}</a> --}}
+
     </div>
   </nav>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Biodata;
 use Illuminate\Http\Request;
+use App\Http\Controllers;
 
 class AlumniController extends Controller
 {
@@ -11,7 +13,10 @@ class AlumniController extends Controller
      */
     public function index()
     {
-        return view('alumni');
+        return view("alumni.bios.index", [
+            "biodatas" => Biodata::where('user_id', auth()->user()->id)->get()
+        ]);
+        
     }
 
     /**
@@ -19,7 +24,8 @@ class AlumniController extends Controller
      */
     public function create()
     {
-        //
+        return view("alumni.bios.create");
+        
     }
 
     /**
@@ -27,37 +33,87 @@ class AlumniController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return $request->file('foto')->store('img');
+        $validatedData = $request->validate([
+            'nim' => 'required',
+            'name' => 'required',
+            'foto' => 'image|file',
+            'user_id' => "required",
+            'thnLulus' => 'required',
+            'jk' => 'required',
+            'tempatLahir' => 'required',
+            'tglLahir' => 'required',
+            'agama' => 'required',
+            'pekerjaan' => 'required',
+            'kawin' => 'required'
+        ]);
+
+        $tahunMasuk = "20" . $validatedData["nim"][0].$validatedData["nim"][1];
+        // dd($request);
+        $validatedData["thnMasuk"] = $tahunMasuk;
+
+        if($request->file('foto')){
+            $validatedData['foto'] = $request->file('foto')->store('img');
+        }
+        // return $validatedData;
+
+        Biodata::create($validatedData);
+        return redirect("/alumni/bios")->with("success", "Biodata Berhasil Ditambahkan");
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Biodata $biodata)
     {
-        //
+        return view("alumni.bios.show",[
+            'bio' => $biodata
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($nim)
     {
-        //
+        return view("alumni.bios.edit",[
+            'bio' => Biodata::find($nim)
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $nim)
     {
-        //
+
+        $validatedData = $request->validate([
+            'nim' => 'required',
+            'name' => 'required',
+            'foto' => 'image|file',
+            'user_id' => "required",
+            'thnLulus' => 'required',
+            'jk' => 'required',
+            'tempatLahir' => 'required',
+            'tglLahir' => 'required',
+            'agama' => 'required',
+            'pekerjaan' => 'required',
+            'kawin' => 'required'
+        ]);
+        // return $validatedData;
+        if($request->file('foto')){
+            $validatedData['foto'] = $request->file('foto')->store('img');
+        }
+
+        Biodata::where('nim', $nim)->update($validatedData);
+        $request->session()->flash('success', 'Biodata Berhasil Diubah"');
+        return redirect('/alumni/bios');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Biodata $biodata)
     {
         //
     }
