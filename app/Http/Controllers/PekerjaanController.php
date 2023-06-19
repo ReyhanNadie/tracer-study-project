@@ -16,7 +16,7 @@ class PekerjaanController extends Controller
     public function index()
     {
         return view("alumni.works.index", [
-            "pekerjaan" => Pekerjaan::all(),
+            "pekerjaan" => Biodata::where('nim', auth()->user()->nim)->get(),
         ]);
     }
 

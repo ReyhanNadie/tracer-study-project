@@ -23,7 +23,7 @@
             <div class="col-sm-6">
                 <h6 class="text-secondary" >Tentang Tracer Study</h6>
                 <h2 class="fw-bold">Apa itu Tracer Study ?</h2>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Natus blanditiis saepe tempore neque magni eaque labore esse sequi libero maiores, dicta aliquam rerum optio earum, ducimus accusantium eveniet a tempora.</p>
+                <p>Tracer Study adalah website yang mengumpulkan data tentang kiprah lulusan di dunia kerja untuk meningkatkan kualitas pendidikan dan program-program perguruan tinggi. Data yang dikumpulkan mencakup data kelulusan alumni, data pekerjan alumni, dan lain lain.</p>
             </div>
         </div>
 
@@ -52,18 +52,19 @@
                 <p class="text-secondary text-center">Rata rata lama masa study {{$rata2_kuliah}} Tahun</p>
             </div>
 
-            <!-- <div class="col-sm-6 my-5">      
-              <h3 class="text-center">Status Pekerjaan</h3>     
-                <div>
-                  <canvas id="chartLamaKuliah"></canvas>
-                </div>
-                <p class="text-secondary text-center">Rata rata lama masa study {{$rata2_kuliah}} Tahun</p>
-            </div> -->
 
             <div class="col-sm-6 my-5">      
               <h3 class="text-center">Status Pekerjaan</h3>     
                 <div>
                   <canvas id="chartBekerja"></canvas>
+                </div>
+                <p class="text-secondary text-center">Jumlah Alumni yang sudah bekerja : {{count($sudahBekerja)}} </p>
+            </div>
+
+            <div class="col-sm-6 my-5">      
+              <h3 class="text-center">Relevansi Pekerjaan</h3>     
+                <div>
+                  <canvas id="chartRelevansi"></canvas>
                 </div>
                 <p class="text-secondary text-center">Jumlah Alumni yang sudah bekerja : {{count($sudahBekerja)}} </p>
             </div>
@@ -77,23 +78,24 @@
             </div>
 
             <div class="col-sm-6 my-5">      
-              <h3 class="text-center">Relevansi Pekerjaan</h3>     
+              <h3 class="text-center">Gaji Alumni</h3>     
                 <div>
-                  <canvas id="chartRelevansi"></canvas>
+                  <canvas id="chartGaji"></canvas>
                 </div>
-                <p class="text-secondary text-center">{{($relevan)}} alumni pekerjaannya relevan</p>
+                <p class="text-secondary text-center">Rata-rata Gaji Alumni : Rp. {{($avgGaji)}} </p>
             </div>
 
           </div>    
         </div>
-        
+
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
             
             <script>
               const cKelulusan = document.getElementById('chartKelulusan'),
                     cBekerja = document.getElementById('chartBekerja'),
-                    cRelevan = document.getElementById('chartRelevansi'),
+                    cRelevansi = document.getElementById('chartRelevansi'),
                     cKategori = document.getElementById('chartKategori'),
+                    cGaji = document.getElementById('chartGaji'),
                     cLamaKuliah = document.getElementById('chartLamaKuliah');
       
                     
@@ -116,52 +118,36 @@
                   }]
                 },
 
+                options: {
+                  animations: {
+                    tension: {
+                      duration: 1000,
+                      easing: 'linear',
+                      from: 1,
+                      to: 0,
+                      loop: true
+                    }
+                  },
+                  scales: {
+                    y: { // defining min and max so hiding the dataset does not change scale range
+                      beginAtZero: true
+                    }
+                  }
+                }
               });
 
               new Chart(cBekerja, {
                 type: 'pie',
                 data: {
-                  labels: ["Sudah Bekerja", "Belum Bekerja", "Wirausaha"],
+                  labels: ["Sudah Bekerja", "Belum Bekerja"],
                   datasets: [{
                     label: 'Jumlah',
-                    data: [sudahBekerja, belumBekerja, 8],
+                    data: [sudahBekerja, belumBekerja],
                     hoverOffset: 4,
                     backgroundColor: [
                       '#47A992',
                       'red',
                       '#36A2EB'
-                    ],
-                  }]
-                }
-              });
-
-              new Chart(cRelevan,{
-                type: 'pie',
-                data: {
-                  labels: ["Relevan", "Tidak Relevan"],
-                  datasets: [{
-                    label: 'Jumlah',
-                    data: [{{ $relevan }}, {{ $tidakRelevan }}],
-                    hoverOffset: 4,
-                    backgroundColor: [
-                      '#47A992',
-                      'red',
-                    ],
-                  }]
-                }
-              });
-
-              new Chart(cKategori,{
-                type: 'pie',
-                data: {
-                  labels: ["IT ~ Kependidikan", "IT ~ Non Kependidikan"],
-                  datasets: [{
-                    label: 'Jumlah',
-                    data: [{{ $relevan }}, {{ $tidakRelevan }}],
-                    hoverOffset: 4,
-                    backgroundColor: [
-                      '#47A992',
-                      'red',
                     ],
                   }]
                 }
@@ -178,10 +164,67 @@
                     hoverOffset: 4,
                     borderWidth:2,
                     backgroundColor: ['#47A992', '#36A2EB', '#B70404']
+                  }],
+                },
+                options:{
+                  scales: {
+                    y: { // defining min and max so hiding the dataset does not change scale range
+                      beginAtZero: true
+                    }
+                  }
+                }
+              });
+
+              new Chart(cRelevansi, {
+                type: 'pie',
+                data: {
+                  labels: ["Relevan", "Tidak Relevan"],
+                  datasets: [{
+                    label: 'Alumni',
+                    data: [{{$pRelevan}}, {{$pTRelevan}} ],
+                    hoverOffset: 4,
+                    borderWidth:2,
+                    backgroundColor: ['#47A992', 'red']
+                  }]
+                },
+              });
+
+              new Chart(cKategori, {
+                type: 'pie',
+                data: {
+                  labels: ["IT Non kependidikan", "IT kependidikan", "Kependidikan IT", "Kependidikan Non IT", "Non IT Non Kependidikan" ],
+                  datasets: [{
+                    label: 'Alumni',
+                    data: [{{ $kategoriPekerjaan1}}, {{ $kategoriPekerjaan2 }}, {{ $kategoriPekerjaan3 }}, {{ $kategoriPekerjaan4 }}, {{ $kategoriPekerjaan5 }} ],
+                    hoverOffset: 4,
+                    borderWidth:2,
+                    backgroundColor: ['lightblue', '#47A992', 'blue', 'brown', 'red']
                   }]
                 }
               });
-            </script>
-                      @endif
-@endsection
 
+              new Chart(cGaji, {
+                type: 'line',
+                data: {
+                  labels: ["1 ~ 3 Juta", "3 ~ 8 Juta", "8 ~ 13 Juta", "13 ~ 18 Juta", "18 ~ 25 Juta" ],
+                  datasets: [{
+                    label: 'Jumlah',
+                    data: [{{ $gajiAlumni[0]}}, {{ $gajiAlumni[1] }}, {{ $gajiAlumni[2] }}, {{ $gajiAlumni[3] }}, {{ $gajiAlumni[4] }} ],
+                    hoverOffset: 4,
+                    borderWidth:2,
+                    borderColor:'lightblue',
+                    backgroundColor: ['lightblue', '#47A992', 'blue', 'brown', 'red']
+                  }]
+                },
+                options:{
+                  scales: {
+                    y: { // defining min and max so hiding the dataset does not change scale range
+                      beginAtZero: true
+                    }
+                  }
+                }
+              });
+
+            </script>
+        @endif
+@endsection

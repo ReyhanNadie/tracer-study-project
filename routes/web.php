@@ -4,12 +4,15 @@ use App\Models\Biodata;
 use App\Models\Pekerjaan;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorkController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AlumniController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PekerjaanController;
 use App\Http\Controllers\AlumniPostController;
+use App\Http\Controllers\AdminBiodataController;
 use App\Http\Controllers\AlumniBiodataController;
+use App\Http\Controllers\AdminPekerjaanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,8 +42,6 @@ Route::get('/', function () {
     $kelulusanLebih6Thn = [];
     $kelulusanLebih5Thn = [];
     $kelulusanKurang4Thn = [];
-    $relevan = 0;
-    $tidakRelevan = 0;
 
     foreach ($biodatas as $biodata) {
         $selisih = $biodata->thnLulus - $biodata->thnMasuk;
@@ -74,18 +75,59 @@ Route::get('/', function () {
         }
     }
 
-    
+    $pRelevan = 0;
+    $pTRelevan = 0;
+    $kategoriPekerjaan1 = 0;
+    $kategoriPekerjaan2 = 0;
+    $kategoriPekerjaan3 = 0;
+    $kategoriPekerjaan4 = 0;
+    $kategoriPekerjaan5 = 0;
 
-    foreach( $pekerjaans as $pekerjaan){
-        
+    $gajiAlumni = [0,0,0,0,0];
+
+    $totalGaji = 0;
+
+    foreach($pekerjaans as $pekerjaan){
         if($pekerjaan->relevansi_pekerjaan == "relevan"){
-            $relevan+=1;
+            $pRelevan += 1;
         }else{
-            $tidakRelevan+=1;
+            $pTRelevan += 1;
+        }
+
+        if($pekerjaan->kategori_pekerjaan == "IT Non kependidikan"){
+            $kategoriPekerjaan1 += 1;
+        }else if($pekerjaan->kategori_pekerjaan == "IT kependidikan"){
+            $kategoriPekerjaan2 += 1;            
+        }else if($pekerjaan->kategori_pekerjaan == "Kependidikan IT"){
+            $kategoriPekerjaan3 += 1;
+        }else if($pekerjaan->kategori_pekerjaan == "Kependidikan Non IT"){
+            $kategoriPekerjaan4 += 1;
+        }else if($pekerjaan->kategori_pekerjaan == "Non IT Non Kependidikan"){
+            $kategoriPekerjaan5 += 1;
+        }
+
+        if($pekerjaan->gaji > 1000000 && $pekerjaan->gaji < 3000000){
+            $gajiAlumni[0] += 1;
+            $totalGaji += $pekerjaan->gaji;
+        }else if($pekerjaan->gaji >= 3000000 && $pekerjaan->gaji < 8000000){
+            $gajiAlumni[1] += 1;
+            $totalGaji += $pekerjaan->gaji;
+        }else if($pekerjaan->gaji >= 8000000 && $pekerjaan->gaji < 13000000){
+            $gajiAlumni[2] += 1;
+            $totalGaji += $pekerjaan->gaji;
+        }else if($pekerjaan->gaji >= 13000000 && $pekerjaan->gaji < 18000000){
+            $gajiAlumni[3] += 1;
+            $totalGaji += $pekerjaan->gaji;
+        }else if($pekerjaan->gaji >= 18000000 && $pekerjaan->gaji < 25000000){
+            $gajiAlumni[4] += 1;
+            $totalGaji += $pekerjaan->gaji;
         }
     }
-
     $avg = $total / count($biodatas);
+
+
+    $avgGaji = $totalGaji / count($pekerjaans);
+
     
     return view('home', [
         "title" => "home",
@@ -104,8 +146,15 @@ Route::get('/', function () {
         "K6tahun" => $kelulusanLebih6Thn,
         "K5tahun" => $kelulusanLebih5Thn,
         "K3tahun" => $kelulusanKurang4Thn,
-        "relevan" => $relevan,
-        "tidakRelevan" => $tidakRelevan,
+        "pRelevan" => $pRelevan,
+        "pTRelevan" => $pTRelevan,
+        "kategoriPekerjaan1" => $kategoriPekerjaan1,
+        "kategoriPekerjaan2" => $kategoriPekerjaan2,
+        "kategoriPekerjaan3" => $kategoriPekerjaan3,
+        "kategoriPekerjaan4" => $kategoriPekerjaan4,
+        "kategoriPekerjaan5" => $kategoriPekerjaan5,
+        "gajiAlumni" => $gajiAlumni,
+        "avgGaji" => $avgGaji,
         
     ]);
 }else{
@@ -134,5 +183,25 @@ Route::resource('/alumni/bios', AlumniController::class)->middleware("auth");
 // Route::get('/alumni/works/{work:id}', [PekerjaanController::class, 'show']); 
 // Route::resource('/alumni/works', PekerjaanController::class)->middleware("auth");
 Route::resource('/alumni/works', PekerjaanController::class)->middleware("auth");
+Route::resource('/admin/user', AdminController::class)->middleware("auth");
+Route::resource('/admin/biodata', AdminBiodataController::class)->middleware("auth");
+Route::resource('/admin/pekerjaan', AdminPekerjaanController::class)->middleware("auth");
 // Route::get('/alumni/works}', [WorkController::class, 'index']);
 // Route::get('/alumni/works/{work}', [WorkController::class, 'show']);
+
+// Route::get('/admin/pdf', [AdminController::class, 'exportPDF'])->name('export.pdf');
+
+// user
+Route::get('file-import-export', [AdminController::class, 'fileImportExport']);
+Route::post('file-import', [AdminController::class, 'fileImport'])->name('file-import');
+Route::get('file-export', [AdminController::class, 'fileExport'])->name('file-export');
+
+// biodata
+Route::get('biodata-import-export', [AdminBiodataController::class, 'fileImportExport']);
+Route::post('biodata-import', [AdminBiodataController::class, 'fileImport'])->name('biodata-import');
+Route::get('biodata-export', [AdminBiodataController::class, 'fileExport'])->name('biodata-export');
+
+// pekerjaan
+Route::get('pekerjaan-import-export', [AdminPekerjaanController::class, 'fileImportExport']);
+Route::post('pekerjaan-import', [AdminPekerjaanController::class, 'fileImport'])->name('pekerjaan-import');
+Route::get('pekerjaan-export', [AdminPekerjaanController::class, 'fileExport'])->name('pekerjaan-export');
